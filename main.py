@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 api_key = 'J0ZZBH2KSU9ZFACY'
 
 # Symbol giełdowy, dla którego chcesz pobrać dane (np. "AAPL" dla Apple)
-symbol = 'F'
+symbol = 'KO'
 
 # Interval czasowy (np. "5min" dla danych co 5 minut)
 interval = '5min'
@@ -20,11 +20,10 @@ response_price = requests.get(url_price)
 # Sprawdzenie, czy żądanie zostało wykonane poprawnie
 if response_price.status_code == 200:
     data_price = response_price.json()
-    time_series_data = data_price['Time Series (5min)']
+    print(data_price)  # Wyświetlenie całej odpowiedzi API
 
-    # Rozdzielenie dat i cen zamknięcia z danych
-    dates = list(time_series_data.keys())
-    prices = [float(data_point['4. close']) for data_point in time_series_data.values()]
+    # Spróbuj dalej przetwarzać dane, np. rozdzielić daty i ceny zamknięcia
+    time_series_data = data_price.get('Time Series (5min)', {})
 
     # Wyświetlenie wykresu cen zamknięcia
     # ... Twój kod generowania wykresu ...
